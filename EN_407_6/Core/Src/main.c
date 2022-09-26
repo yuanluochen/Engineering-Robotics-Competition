@@ -134,7 +134,7 @@ int main(void)
 			rx_buffer_used[i] = (RxBufVal())[i];
 		}
 #else
-		rx_buffer_used[0] = 2;
+		rx_buffer_used[0] = 4;
 	  
 		rx_buffer_used[2] = 51;
 #endif

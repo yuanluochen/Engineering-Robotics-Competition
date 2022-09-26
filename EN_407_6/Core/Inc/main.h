@@ -100,7 +100,8 @@ void Error_Handler(void);
 #define SERVO_BACK_GRAP_R_OPEN_ANGLE (SERVO_BACK_GRAP_R_CLOSE_ANGLE + SERVO_BACK_GRAP_OPEN_ANGLE)
 
 
-
+//后侧抬升舵机抬升角度
+#define SERVO_BACK_LIFT_UP_ANGLE 20
 //后侧抬升舵机定时器
 #define SERVO_BACK_LIFT_TIM htim4
 //后侧抬升舵机定时器通道
@@ -108,7 +109,7 @@ void Error_Handler(void);
 //后侧抬升电机 下降
 #define SERVO_BACK_LIFT_DOWN 180
 //后侧抬升电机 上升
-#define SERVO_BACK_LIFT_UP 90
+#define SERVO_BACK_LIFT_UP (SERVO_BACK_LIFT_DOWN - SERVO_BACK_LIFT_UP_ANGLE)
 
 /* USER CODE BEGIN Private defines */
 
