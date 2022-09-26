@@ -49,23 +49,23 @@ PID fuzzy(float e,float ec) // e 是目标值和反馈值的误差 ec是误差变化率(误差e的微
      int eRightIndex,ecRightIndex;
      PID      fuzzy_PID;
 	
-     etemp = e > 3.0 ? 0.0 : (e < - 3.0 ? 0.0 : (e >= 0.0 ? (e >= 2.0 ? 2.5: (e >= 1.0 ? 1.5 : 0.5)) : (e >= -1.0 ? -0.5 : (e >= -2.0 ? -1.5 : (e >= -3.0 ? -2.5 : 0.0) ))));
+     etemp = e > 3.0f ? 0.0f : (e < - 3.0f ? 0.0f : (e >= 0.0f ? (e >= 2.0f ? 2.5f: (e >= 1.0f ? 1.5f : 0.5f)) : (e >= -1.0f ? -0.5f : (e >= -2.0f ? -1.5f : (e >= -3.0f ? -2.5f : 0.0f) ))));
 
      eLeftIndex = (int)e;
      eRightIndex = eLeftIndex;
-     eLeftIndex = (int)((etemp-0.5) + 3);        //[-3,3] -> [0,6]
-     eRightIndex = (int)((etemp+0.5) + 3);
+     eLeftIndex = (int)((etemp-0.5f) + 3);        //[-3,3] -> [0,6]
+     eRightIndex = (int)((etemp+0.5f) + 3);
 
-     eLefttemp =etemp == 0.0 ? 0.0:((etemp+0.5)-e);
-     eRighttemp=etemp == 0.0 ? 0.0:( e-(etemp-0.5));
+     eLefttemp =etemp == 0.0f ? 0.0f:((etemp+0.5f)-e);
+     eRighttemp=etemp == 0.0f ? 0.0f:( e - (etemp - 0.5f));
 
-     ectemp = ec > 3.0 ? 0.0 : (ec < - 3.0 ? 0.0 : (ec >= 0.0 ? (ec >= 2.0 ? 2.5: (ec >= 1.0 ? 1.5 : 0.5)) : (ec >= -1.0 ? -0.5 : (ec >= -2.0 ? -1.5 : (ec >= -3.0 ? -2.5 : 0.0) ))));
+     ectemp = ec > 3.0f ? 0.0f : (ec < - 3.0f ? 0.0f : (ec >= 0.0f ? (ec >= 2.0f ? 2.5f: (ec >= 1.0f ? 1.5f : 0.5f)) : (ec >= -1.0f ? -0.5f : (ec >= -2.0f ? -1.5f : (ec >= -3.0f ? -2.5f : 0.0f) ))));
 
-     ecLeftIndex = (int)((ectemp-0.5) + 3);        //[-3,3] -> [0,6]
-     ecRightIndex = (int)((ectemp+0.5) + 3);
+     ecLeftIndex = (int)((ectemp-0.5f) + 3);        //[-3,3] -> [0,6]
+     ecRightIndex = (int)((ectemp+0.5f) + 3);
 
-     ecLefttemp =ectemp == 0.0 ? 0.0:((ectemp+0.5)-ec);
-     ecRighttemp=ectemp == 0.0 ? 0.0:( ec-(ectemp-0.5));
+     ecLefttemp =ectemp == 0.0f ? 0.0f:((ectemp+0.5f)-ec);
+     ecRighttemp=ectemp == 0.0f ? 0.0f:( ec-(ectemp-0.5f));
 
 /*************************************反模糊*************************************/
 	fuzzy_PID.Kp = (eLefttemp * ecLefttemp *  fuzzyRuleKp[ecLeftIndex][eLeftIndex]
@@ -109,8 +109,8 @@ float pwmout=0;
 void motor_Fuzzypid_control_R(float PID_OUT)
 {
 	pwmout=PID_OUT;
-	if(PID_OUT>7100.0) PID_OUT=7100;
-	if(PID_OUT<-7100.0) PID_OUT=-7100;
+	if(PID_OUT>7100.0f) PID_OUT=7100;
+	if(PID_OUT<-7100.0f) PID_OUT=-7100;
 
 	if(fabs(PID_OUT)<=FuzzyPidTarge_Error)
 	{
@@ -139,8 +139,8 @@ void motor_Fuzzypid_control_R(float PID_OUT)
 void motor_Fuzzypid_control_L(float PID_OUT)
 {
 	pwmout=PID_OUT;
-	if(PID_OUT>7100.0) PID_OUT=7100;
-	if(PID_OUT<-7100.0) PID_OUT=-7100;
+	if(PID_OUT>7100.0f) PID_OUT=7100;
+	if(PID_OUT<-7100.0f) PID_OUT=-7100;
 
 	if(fabs(PID_OUT)<=FuzzyPidTarge_Error)
 	{
@@ -154,6 +154,7 @@ void motor_Fuzzypid_control_L(float PID_OUT)
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
 		TIM1->CCR2=PID_OUT;
+
 //		printf("     go \r\n");
 	}
 	else if(PID_OUT+FuzzyPidTarge_Error<0) 
@@ -161,6 +162,7 @@ void motor_Fuzzypid_control_L(float PID_OUT)
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
 		TIM1->CCR2=-PID_OUT;
+
 //		printf("     dowm \r\n");
 	}
 	

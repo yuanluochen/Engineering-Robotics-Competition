@@ -136,57 +136,86 @@ int main(void)
 #else
 		rx_buffer_used[0] = 2;
 #endif
-		if(rx_buffer_used[0]==4)   //圆筒为前，直行
+		if(rx_buffer_used[0] == 4)   //圆筒为前，直行
 		{
-			tar_speed_L=5;
-			tar_speed_R=5;
-		}else if(rx_buffer_used[0]==5)  //圆筒为前，左转
+			tar_speed_L = 5;
+			tar_speed_R = 5;
+		}else if(rx_buffer_used[0] == 5)  //圆筒为前，左转
 		{
-			tar_speed_L=5;
-			tar_speed_R=6;
+			tar_speed_L = 5;
+			tar_speed_R = 6;
 		}
-		else if(rx_buffer_used[0]==6)   //圆筒为前，右转
+		else if(rx_buffer_used[0] == 6)   //圆筒为前，右转
 		{
-			tar_speed_L=5;
-			tar_speed_R=6;
+			tar_speed_L = 5;
+			tar_speed_R = 6;
 		}
-		else if(rx_buffer_used[0]==1)    //夹子为前，直行
+		else if(rx_buffer_used[0] == 1)    //夹子为前，直行
 		{
-			tar_speed_L=-5;
-			tar_speed_R=-5;
+			tar_speed_L = -5;
+			tar_speed_R = -5;
 		}		
-		else if(rx_buffer_used[0]==2)    //夹子为前，左转
+		else if(rx_buffer_used[0] == 2)    //夹子为前，左转
 		{
-			tar_speed_L=-5;
-			tar_speed_R=-6;
+			tar_speed_L = -5;
+			tar_speed_R = -6;
 		}
-		else if(rx_buffer_used[0]==3)    //夹子为前，右转
+		else if(rx_buffer_used[0] == 3)    //夹子为前，右转
 		{
-			tar_speed_L=-6;
-			tar_speed_R=-5;
+			tar_speed_L = -6;
+			tar_speed_R = -5;
 		}
-		else {
-			tar_speed_L=0;                        //停止
-			tar_speed_R=0;
+		else 
+    {
+			tar_speed_L = 0;                        //停止
+			tar_speed_R = 0;
 		}
-	 if(rx_buffer_used[1]==10){
+	 if(rx_buffer_used[1]==10)
+    {
 			  Set_SG90_angle(&htim4,TIM_CHANNEL_1,0,200,20);      //左夹子
 		}
-		else if(rx_buffer_used[1]==11){
+		else if(rx_buffer_used[1]==11)
+    {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_1,90,200,20);
 		}
-		else if(rx_buffer_used[1]==20){
+		else if(rx_buffer_used[1]==20)
+    {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_2,0,200,20);
 		}
-		else if(rx_buffer_used[1]==21){
+		else if(rx_buffer_used[1]==21)
+    {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_2,90,200,20);
 		}
-		else if(rx_buffer_used[1]==30){
+		else if(rx_buffer_used[1]==30)
+    {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_3,180,200,20);
 		}		
-		else if(rx_buffer_used[1]==31){
+		else if(rx_buffer_used[1]==31)
+    {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_3,170,200,20);
 		}
+    else if (rx_buffer_used[2] == 40)//圆筒关闭
+    {
+        //关闭左右侧夹爪
+        Set_SG90_angle(&SERVO_BACK_GRAP_TIM, SERVO_BACK_GRAP_L_CHANNEL, SERVO_BACK_GRAP_L_CLOSE_ANGLE, 200, 20); 
+        Set_SG90_angle(&SERVO_BACK_GRAP_TIM, SERVO_BACK_GRAP_R_CHANNEL, SERVO_BACK_GRAP_R_CLOSE_ANGLE, 200, 20); 
+    }
+    else if (rx_buffer_used[2] == 41)//圆筒张开
+    {
+        //张开左右侧夹抓
+        Set_SG90_angle(&SERVO_BACK_GRAP_TIM, SERVO_BACK_GRAP_L_CHANNEL, SERVO_BACK_GRAP_L_OPEN_ANGLE, 200, 20); 
+        Set_SG90_angle(&SERVO_BACK_GRAP_TIM, SERVO_BACK_GRAP_R_CHANNEL, SERVO_BACK_GRAP_R_OPEN_ANGLE, 200, 20); 
+    }
+    else if (rx_buffer_used[2] == 50)//后侧抬升舵机下降
+    {
+        //圆筒下降
+        Set_SG90_angle(&SERVO_BACK_LIFT_TIM, SERVO_BACK_LIFT_CHANNEL, SERVO_BACK_LIFT_DOWN, 200, 20);
+    }
+    else if (rx_buffer_used[2] == 51)//后侧抬升电机上升
+    {
+        //圆筒上升
+        Set_SG90_angle(&SERVO_BACK_LIFT_TIM, SERVO_BACK_LIFT_CHANNEL, SERVO_BACK_LIFT_UP, 200, 20); 
+    }
 		
   }
   /* USER CODE END 3 */

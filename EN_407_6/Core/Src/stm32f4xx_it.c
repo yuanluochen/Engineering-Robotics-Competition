@@ -444,7 +444,7 @@ void USART6_IRQHandler(void)
 	}
 	else if(USART6->SR & UART_FLAG_IDLE)//空闲中断
 	{
-		static uint16_t this_time_rx_len = 0;//存放接收到的数据长度
+		volatile static uint16_t this_time_rx_len = 0;//存放接收到的数据长度
 
 		__HAL_UART_CLEAR_PEFLAG(&huart6);
 

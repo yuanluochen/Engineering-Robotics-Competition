@@ -47,6 +47,10 @@ typedef struct{
 	float Kd;
 }PID;
 
+#define MOTOR_TIM htim1
+#define MOTOR_LEFT_CHANNEL TIM_CHANNEL_1
+#define MOTOR_RIGHT_CHANNEL TIM_CHANNEL_2
+
 #define FuzzyPidMotor_OpenPwm 3500 // 电机死区
 #define FuzzyPidTarge_Error 0 // 目标值允许误差
 
@@ -57,7 +61,7 @@ PID fuzzy(float e,float ec); // 模糊PID自整定函数
 float FuzzyPid_Out(float tar,float cur);  // 目标值 , 实际值
 void motor_Fuzzypid_control_L(float PID_OUT);
 void motor_Fuzzypid_control_R(float PID_OUT);
-void motor_init();   //初始化
+void motor_init(void);   //初始化
 
 void FuzzyPid_ControlPwm_L(float targe);
 void FuzzyPid_ControlPwm_R(float targe);

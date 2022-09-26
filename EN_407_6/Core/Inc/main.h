@@ -77,6 +77,55 @@ void Error_Handler(void);
 #define Motor_R1_GPIO_Port GPIOC
 #define Motor_R2_Pin GPIO_PIN_5
 #define Motor_R2_GPIO_Port GPIOC
+
+
+//圆筒电机定时器
+#define SERVO_BACK_GRAP_TIM htim5
+
+#if 1
+
+//后侧电机左侧夹爪电机定时器通道 -- 通道1
+#define SERVO_BACK_GRAP_L_CHANNEL TIM_CHANNEL_1
+//左侧电机张开角度
+#define SERVO_BACK_GRAP_L_OPEN_ANGLE 0
+//左侧电即关闭角度
+#define SERVO_BACK_GRAP_L_CLOSE_ANGLE 180
+
+//后侧电机右侧夹爪电机定时器通道 -- 通道2
+#define SERVO_BACK_GRAP_R_CHANNEL TIM_CHANNEL_2
+//左侧电机张开角度
+#define SERVO_BACK_GRAP_R_OPEN_ANGLE 180
+//右侧电机关闭角度
+#define SERVO_BACK_GRAP_R_CLOSE_ANGLE 0
+
+#else
+
+//后侧电机左侧夹爪电机定时器通道 -- 通道2
+#define MOTOR_BACK_GRAP_L_CHANNEL TIM_CHANNEL_2
+//左侧电机张开角度
+#define MOTOR_BACK_GRAP_L_OPEN_ANGLE 180
+//左侧电即关闭角度
+#define MOTOR_BACK_GRAP_L_CLOSE_ANGLE 0
+
+//后侧电机右侧夹爪电机定时器通道 -- 通道1
+#define MOTOR_BACK_GRAP_R_CHANNEL TIM_CHANNEL_1
+//左侧电机张开角度
+#define MOTOR_BACK_GRAP_R_OPEN_ANGLE 0
+//右侧电机关闭角度
+#define MOTOR_BACK_GRAP_R_CLOSE_ANGLE 180
+
+
+#endif
+
+//后侧抬升舵机定时器
+#define SERVO_BACK_LIFT_TIM htim4
+//后侧抬升舵机定时器通道
+#define SERVO_BACK_LIFT_CHANNEL TIM_CHANNEL_4
+//后侧抬升电机 下降
+#define SERVO_BACK_LIFT_DOWN 180
+//后侧抬升电机 上升
+#define SERVO_BACK_LIFT_UP 90
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

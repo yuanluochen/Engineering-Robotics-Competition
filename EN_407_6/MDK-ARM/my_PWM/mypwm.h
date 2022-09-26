@@ -20,7 +20,7 @@
 
 
 	
-void Servomotor_Init();
+void Servomotor_Init(void);
 void Set_SG90_angle(TIM_HandleTypeDef * htim,uint32_t Channel,uint8_t angle,uint32_t countPeriod,uint32_t CycleTime);
 
 
