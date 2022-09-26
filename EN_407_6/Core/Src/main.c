@@ -135,6 +135,8 @@ int main(void)
 		}
 #else
 		rx_buffer_used[0] = 2;
+	  
+		rx_buffer_used[2] = 51;
 #endif
 		if(rx_buffer_used[0] == 4)   //圆筒为前，直行
 		{

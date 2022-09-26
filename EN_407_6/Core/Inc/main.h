@@ -81,41 +81,25 @@ void Error_Handler(void);
 
 //圆筒电机定时器
 #define SERVO_BACK_GRAP_TIM htim5
+#define SERVO_BACK_GRAP_OPEN_ANGLE 35
 
-#if 1
+
 
 //后侧电机左侧夹爪电机定时器通道 -- 通道1
 #define SERVO_BACK_GRAP_L_CHANNEL TIM_CHANNEL_1
-//左侧电机张开角度
-#define SERVO_BACK_GRAP_L_OPEN_ANGLE 0
 //左侧电即关闭角度
 #define SERVO_BACK_GRAP_L_CLOSE_ANGLE 180
+//左侧电机张开角度
+#define SERVO_BACK_GRAP_L_OPEN_ANGLE (SERVO_BACK_GRAP_L_CLOSE_ANGLE - SERVO_BACK_GRAP_OPEN_ANGLE)
 
 //后侧电机右侧夹爪电机定时器通道 -- 通道2
 #define SERVO_BACK_GRAP_R_CHANNEL TIM_CHANNEL_2
-//左侧电机张开角度
-#define SERVO_BACK_GRAP_R_OPEN_ANGLE 180
 //右侧电机关闭角度
 #define SERVO_BACK_GRAP_R_CLOSE_ANGLE 0
-
-#else
-
-//后侧电机左侧夹爪电机定时器通道 -- 通道2
-#define MOTOR_BACK_GRAP_L_CHANNEL TIM_CHANNEL_2
 //左侧电机张开角度
-#define MOTOR_BACK_GRAP_L_OPEN_ANGLE 180
-//左侧电即关闭角度
-#define MOTOR_BACK_GRAP_L_CLOSE_ANGLE 0
-
-//后侧电机右侧夹爪电机定时器通道 -- 通道1
-#define MOTOR_BACK_GRAP_R_CHANNEL TIM_CHANNEL_1
-//左侧电机张开角度
-#define MOTOR_BACK_GRAP_R_OPEN_ANGLE 0
-//右侧电机关闭角度
-#define MOTOR_BACK_GRAP_R_CLOSE_ANGLE 180
+#define SERVO_BACK_GRAP_R_OPEN_ANGLE (SERVO_BACK_GRAP_R_CLOSE_ANGLE + SERVO_BACK_GRAP_OPEN_ANGLE)
 
 
-#endif
 
 //后侧抬升舵机定时器
 #define SERVO_BACK_LIFT_TIM htim4
