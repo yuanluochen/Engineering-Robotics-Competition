@@ -70,6 +70,7 @@ int std_left_get;
 int std_center_get;
 int std_both_get;
 /* USER CODE END PFP */
+
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
@@ -121,22 +122,22 @@ int main(void)
 	motor_init();
 	HAL_TIM_Base_Start_IT((TIM_HandleTypeDef *)&htim6);  
   /* USER CODE END 2 */
+
   /* Infinite loop */
 	Servomotor_Init();
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		
-		/* USER CODE END WHILE */
-#if 0
+    /* USER CODE END WHILE */
+#if 1
 		for(int i = 0; i < 3; i++)
 		{
 			rx_buffer_used[i] = (RxBufVal())[i];
 		}
 #else
-		rx_buffer_used[0] = 4;
-	  
-		rx_buffer_used[2] = 51;
+	
+		rx_buffer_used[0] = 5;
+
 #endif
 		if(rx_buffer_used[0] == 4)   //圆筒为前，直行
 		{
@@ -218,7 +219,7 @@ int main(void)
         //圆筒上升
         Set_SG90_angle(&SERVO_BACK_LIFT_TIM, SERVO_BACK_LIFT_CHANNEL, SERVO_BACK_LIFT_UP, 200, 20); 
     }
-		
+
   }
   /* USER CODE END 3 */
 }

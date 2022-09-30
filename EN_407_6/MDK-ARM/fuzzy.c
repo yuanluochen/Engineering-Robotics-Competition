@@ -90,7 +90,7 @@ PID fuzzy(float e,float ec) // e 是目标值和反馈值的误差 ec是误差变化率(误差e的微
 float FuzzyPid_Out(float tar,float cur)  // 目标值 , 实际值
 {
    float e = 0,ec = 0;       // 误差e 误差变化率ec(误差e的微分)  系统死区设置量 不一定为零
-	static PID pid= {4, 0, 0.01};
+	static PID pid= {6, 0, 0.01};
 	static int sumE = 0;                   //累加偏差
 	static int lastE = 0;
 	PID OUT = {0, 0, 0};
@@ -141,12 +141,13 @@ void motor_Fuzzypid_control_L(float PID_OUT)
 	pwmout=PID_OUT;
 	if(PID_OUT>7100.0f) PID_OUT=7100;
 	if(PID_OUT<-7100.0f) PID_OUT=-7100;
-
+#if 1
 	if(fabs(PID_OUT)<=FuzzyPidTarge_Error)
 	{
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
 		TIM1->CCR2=0;
+
 //		printf("     stop \r\n");
 	}	
 	else if(PID_OUT-FuzzyPidTarge_Error>0)							
@@ -165,6 +166,31 @@ void motor_Fuzzypid_control_L(float PID_OUT)
 
 //		printf("     dowm \r\n");
 	}
+#else
+		if(fabs(PID_OUT)<=FuzzyPidTarge_Error)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+		//TIM1->CCR2=0;
+//		printf("     stop \r\n");
+	}	
+	else if(PID_OUT-FuzzyPidTarge_Error>0)							
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+		//TIM1->CCR2=PID_OUT;
+
+//		printf("     go \r\n");
+	}
+	else if(PID_OUT+FuzzyPidTarge_Error<0) 
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+		//TIM1->CCR2=-PID_OUT;
+
+//		printf("     dowm \r\n");
+	}
+#endif
 	
 }
 

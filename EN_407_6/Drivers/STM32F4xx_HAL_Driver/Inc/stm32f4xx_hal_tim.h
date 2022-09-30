@@ -2122,9 +2122,6 @@ void TIM_DMACaptureCplt(DMA_HandleTypeDef *hdma);
 void TIM_DMACaptureHalfCplt(DMA_HandleTypeDef *hdma);
 void TIM_CCxChannelCmd(TIM_TypeDef *TIMx, uint32_t Channel, uint32_t ChannelState);
 
-
-float Date_Decoder(uint8_t* rx_buffer);
-
 #if (USE_HAL_TIM_REGISTER_CALLBACKS == 1)
 void TIM_ResetCallback(TIM_HandleTypeDef *htim);
 #endif /* USE_HAL_TIM_REGISTER_CALLBACKS */

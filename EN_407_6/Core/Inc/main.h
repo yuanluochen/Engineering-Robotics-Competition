@@ -111,6 +111,8 @@ void Error_Handler(void);
 //后侧抬升电机 上升
 #define SERVO_BACK_LIFT_UP (SERVO_BACK_LIFT_DOWN - SERVO_BACK_LIFT_UP_ANGLE)
 
+//定时器自动重装载寄存器数值
+#define TIM1_ARR 100
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

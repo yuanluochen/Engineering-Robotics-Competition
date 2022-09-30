@@ -20,7 +20,7 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32F4xx_IT_H
 #define __STM32F4xx_IT_H
-#include"main.h"
+
 #ifdef __cplusplus
  extern "C" {
 #endif
@@ -96,12 +96,11 @@ extern uint8_t vision_rx_buf[2][VISION_RX_LEN_2];
 
 extern void vision_init(void);
 extern void vision_rx_decode(uint8_t *test_code);
+uint8_t* RxBufVal(void);
 /* USER CODE END EFP */
 
 #ifdef __cplusplus
 }
 #endif
-
-uint8_t* RxBufVal(void);
 
 #endif /* __STM32F4xx_IT_H */
