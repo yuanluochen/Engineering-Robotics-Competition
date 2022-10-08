@@ -410,9 +410,9 @@ void vision_rx_decode(uint8_t *test_code)
 			
 			vision_rxfifo.rx_update_flag = 1;
 			///
-			vision_rxfifo.yaw_fifo 		= (fp32)vision_rxfifo.yaw_fifo 	 / 10000.0f;
-			vision_rxfifo.pitch_fifo  = (fp32)vision_rxfifo.pitch_fifo / 10000.0f;      //angle
-			vision_rxfifo.yaw_disdance=(fp32)vision_rxfifo.yaw_disdance/10000.0f;       //p
+			vision_rxfifo.yaw_fifo = (fp32)vision_rxfifo.yaw_fifo / 10000.0f;
+			vision_rxfifo.pitch_fifo = (fp32)vision_rxfifo.pitch_fifo / 10000.0f;      //angle
+			vision_rxfifo.yaw_disdance = (fp32)vision_rxfifo.yaw_disdance / 10000.0f;       //p
 		}
 	}
 	else if((fp32)((test_code[HEAD0_BASE+0] << 8*3) | (test_code[HEAD0_BASE+1] << 8*2)

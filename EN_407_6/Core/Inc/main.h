@@ -101,7 +101,7 @@ void Error_Handler(void);
 
 
 //后侧抬升舵机抬升角度
-#define SERVO_BACK_LIFT_UP_ANGLE 20
+#define SERVO_BACK_LIFT_UP_ANGLE 40
 //后侧抬升舵机定时器
 #define SERVO_BACK_LIFT_TIM htim4
 //后侧抬升舵机定时器通道
@@ -113,6 +113,16 @@ void Error_Handler(void);
 
 //定时器自动重装载寄存器数值
 #define TIM1_ARR 100
+
+
+//电机运动
+#define RUN 0
+//电机正常直行运动速度
+#define MOTOR_SPEED_MID 5
+//电机转动时电机速度
+#define MOTOR_TURN_SPEED 3
+//电机静止
+#define MOTOR_SPEED_STOP 0
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

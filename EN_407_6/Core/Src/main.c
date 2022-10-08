@@ -129,6 +129,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+//该条件编译用于测试
 #if 1
 		for(int i = 0; i < 3; i++)
 		{
@@ -136,64 +137,58 @@ int main(void)
 		}
 #else
 	
-		rx_buffer_used[0] = 5;
-
+		rx_buffer_used[2] = 41;
+	  
 #endif
-		if(rx_buffer_used[0] == 4)   //圆筒为前，直行
+		if(rx_buffer_used[0] == 4)   //夹爪为前，直行
 		{
-			tar_speed_L = 5;
-			tar_speed_R = 5;
-		}else if(rx_buffer_used[0] == 5)  //圆筒为前，左转
+			tar_speed_L = -MOTOR_SPEED_MID;
+			tar_speed_R = -MOTOR_SPEED_MID;
+		}else if(rx_buffer_used[0] == 2)  //夹爪为前，左转
 		{
-			tar_speed_L = 5;
-			tar_speed_R = 6;
+			tar_speed_L = -MOTOR_TURN_SPEED;
+			tar_speed_R = MOTOR_TURN_SPEED;
 		}
-		else if(rx_buffer_used[0] == 6)   //圆筒为前，右转
+		else if(rx_buffer_used[0] == 3)   //夹爪为前，右转
 		{
-			tar_speed_L = 5;
-			tar_speed_R = 6;
+      //
+			tar_speed_L = MOTOR_TURN_SPEED;
+			tar_speed_R = -MOTOR_TURN_SPEED;
 		}
-		else if(rx_buffer_used[0] == 1)    //夹子为前，直行
+		else if(rx_buffer_used[0] == 1)    //夹爪为前，后退
 		{
-			tar_speed_L = -5;
-			tar_speed_R = -5;
-		}		
-		else if(rx_buffer_used[0] == 2)    //夹子为前，左转
-		{
-			tar_speed_L = -5;
-			tar_speed_R = -6;
+			tar_speed_L = MOTOR_SPEED_MID;
+			tar_speed_R = MOTOR_SPEED_MID;
 		}
-		else if(rx_buffer_used[0] == 3)    //夹子为前，右转
-		{
-			tar_speed_L = -6;
-			tar_speed_R = -5;
-		}
-		else 
+		else if(rx_buffer_used[0] == 0)
     {
-			tar_speed_L = 0;                        //停止
-			tar_speed_R = 0;
+			tar_speed_L = MOTOR_SPEED_STOP; //停止
+			tar_speed_R = MOTOR_SPEED_STOP;
 		}
-	 if(rx_buffer_used[1]==10)
+	//右侧夹爪
+	 if(rx_buffer_used[1] == 30) //down
     {
-			  Set_SG90_angle(&htim4,TIM_CHANNEL_1,0,200,20);      //左夹子
-		}
-		else if(rx_buffer_used[1]==11)
+			  Set_SG90_angle(&htim4,TIM_CHANNEL_1,0,200,20); 
+	}
+		else if(rx_buffer_used[1]== 31)//up
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_1,90,200,20);
-		}
-		else if(rx_buffer_used[1]==20)
+	}
+	//前侧夹爪
+		else if(rx_buffer_used[1]==20)//down
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_2,0,200,20);
-		}
-		else if(rx_buffer_used[1]==21)
+	}
+		else if(rx_buffer_used[1]==21)//up
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_2,90,200,20);
-		}
-		else if(rx_buffer_used[1]==30)
+	}
+	//左侧夹爪
+		else if(rx_buffer_used[1]==30)//down
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_3,180,200,20);
 		}		
-		else if(rx_buffer_used[1]==31)
+		else if(rx_buffer_used[1]==31)//up
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_3,170,200,20);
 		}

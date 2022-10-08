@@ -15,7 +15,7 @@ void Servomotor_Init()
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
 	Set_SG90_angle(&htim4,TIM_CHANNEL_3,180,200,20);
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
-	Set_SG90_angle(&htim4,TIM_CHANNEL_4,180,200,20);
+	Set_SG90_angle(&htim4,TIM_CHANNEL_4, SERVO_BACK_LIFT_DOWN,200,20);
 	HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1);
 	Set_SG90_angle(&htim5,TIM_CHANNEL_1,180,200,20);
 	HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_2);

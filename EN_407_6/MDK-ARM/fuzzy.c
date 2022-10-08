@@ -90,7 +90,7 @@ PID fuzzy(float e,float ec) // e 是目标值和反馈值的误差 ec是误差变化率(误差e的微
 float FuzzyPid_Out(float tar,float cur)  // 目标值 , 实际值
 {
    float e = 0,ec = 0;       // 误差e 误差变化率ec(误差e的微分)  系统死区设置量 不一定为零
-	static PID pid= {6, 0, 0.01};
+	static PID pid= {15, 0, 0.01};
 	static int sumE = 0;                   //累加偏差
 	static int lastE = 0;
 	PID OUT = {0, 0, 0};
