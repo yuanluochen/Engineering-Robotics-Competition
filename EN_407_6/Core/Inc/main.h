@@ -101,7 +101,7 @@ void Error_Handler(void);
 
 
 //后侧抬升舵机抬升角度
-#define SERVO_BACK_LIFT_UP_ANGLE 40
+#define SERVO_BACK_LIFT_UP_ANGLE 20
 //后侧抬升舵机定时器
 #define SERVO_BACK_LIFT_TIM htim4
 //后侧抬升舵机定时器通道
@@ -118,11 +118,24 @@ void Error_Handler(void);
 //电机运动
 #define RUN 0
 //电机正常直行运动速度
-#define MOTOR_SPEED_MID 5
+#define MOTOR_SPEED_MID 4
 //电机转动时电机速度
 #define MOTOR_TURN_SPEED 3
 //电机静止
 #define MOTOR_SPEED_STOP 0
+//电机速度偏差值
+#define MOTOR_SPEED_DEV 0.5f
+
+#define MOTOR_CCR_MAX `50.0f
+
+
+//PID系数
+#define KP 18
+#define KI 0.1
+#define KD 0.1
+#define PID_OUTMAX 5000.0f
+
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

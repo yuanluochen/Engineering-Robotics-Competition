@@ -120,7 +120,7 @@ int main(void)
 	 vision_init();
 	 
 	motor_init();
-	HAL_TIM_Base_Start_IT((TIM_HandleTypeDef *)&htim6);  
+	HAL_TIM_Base_Start_IT((TIM_HandleTypeDef *) &htim6);  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -137,13 +137,13 @@ int main(void)
 		}
 #else
 	
-		rx_buffer_used[2] = 41;
+		rx_buffer_used[0] = 1;
 	  
 #endif
     //仅保留重要数据位其他位数据，其他位为零
 		if(rx_buffer_used[0] == 4 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)   //夹爪为前，直行
 		{
-			tar_speed_L = -MOTOR_SPEED_MID;
+			tar_speed_L = -(MOTOR_SPEED_MID + MOTOR_SPEED_DEV);
 			tar_speed_R = -MOTOR_SPEED_MID;
 		}else if(rx_buffer_used[0] == 2 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)  //夹爪为前，左转
 		{
@@ -158,7 +158,7 @@ int main(void)
 		}
 		else if(rx_buffer_used[0] == 1 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)    //夹爪为前，后退
 		{
-			tar_speed_L = MOTOR_SPEED_MID;
+			tar_speed_L = (MOTOR_SPEED_MID + MOTOR_SPEED_DEV);
 			tar_speed_R = MOTOR_SPEED_MID;
 		}
 		else if(rx_buffer_used[0] == 0 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)
@@ -166,12 +166,12 @@ int main(void)
 			tar_speed_L = MOTOR_SPEED_STOP; //停止
 			tar_speed_R = MOTOR_SPEED_STOP;
 		}
-	//右侧夹爪
-	 if(rx_buffer_used[0] == 0 && rx_buffer_used[1] == 30 && rx_buffer_used[2] == 0) //down
+	//左侧夹爪
+	 if(rx_buffer_used[0] == 0 && rx_buffer_used[1] == 10 && rx_buffer_used[2] == 0) //down
     {
 			  Set_SG90_angle(&htim4,TIM_CHANNEL_1,0,200,20); 
 	}
-		else if(rx_buffer_used[0] == 0 && rx_buffer_used[1]== 31 && rx_buffer_used[2] == 0)//up
+		else if(rx_buffer_used[0] == 0 && rx_buffer_used[1]== 11 && rx_buffer_used[2] == 0)//up
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_1,90,200,20);
 	}
@@ -184,14 +184,14 @@ int main(void)
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_2,90,200,20);
 	}
-	//左侧夹爪
+	//右侧夹爪
 		else if(rx_buffer_used[0] == 0 && rx_buffer_used[1]==30 && rx_buffer_used[2] == 0)//down
     {
 				Set_SG90_angle(&htim4,TIM_CHANNEL_3,180,200,20);
 		}		
 		else if(rx_buffer_used[0] == 0 && rx_buffer_used[1]==31 && rx_buffer_used[2] == 0)//up
     {
-				Set_SG90_angle(&htim4,TIM_CHANNEL_3,170,200,20);
+				Set_SG90_angle(&htim4,TIM_CHANNEL_3,90,200,20);
 		}
     else if (rx_buffer_used[0] == 0 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 40)//圆筒关闭
     {
@@ -298,5 +298,5 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
-}
+}e
 #endif /* USE_FULL_ASSERT */
