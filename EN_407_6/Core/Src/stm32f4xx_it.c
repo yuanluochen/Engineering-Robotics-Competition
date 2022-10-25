@@ -585,9 +585,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	
 			my_speed_R=real_code_R*0.8+old_speed_R*0.2;
 			old_speed_R=real_code_R;
-			
+
 		motor_Fuzzypid_control_L( FuzzyPid_Out(tar_speed_L,my_speed_L));
 		motor_Fuzzypid_control_R( FuzzyPid_Out(tar_speed_R,my_speed_R));
+			
 	}
 }
 

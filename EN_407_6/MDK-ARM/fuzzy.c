@@ -11,6 +11,8 @@
 #include "stm32f4xx_hal.h"
 #include "tim.h"
 
+
+
 extern int real_code;
 extern float my_speed_L;
 extern float my_speed_R;
@@ -21,6 +23,7 @@ void motor_init()
 	HAL_TIM_Encoder_Start(&htim3,TIM_CHANNEL_ALL); 
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);	
+
 }
 
 int Read_TIM3_Code(void)

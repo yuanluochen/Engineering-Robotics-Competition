@@ -85,6 +85,7 @@ uint8_t rx_buffer[50];//缓存数组
   * @retval int
   */
 int main(void)
+
 {
   /* USER CODE BEGIN 1 */
 
@@ -93,7 +94,11 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+
+
+
+
+	HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -137,26 +142,26 @@ int main(void)
 		}
 #else
 	
-		rx_buffer_used[0] = 1;
+		rx_buffer_used[0] = 8;
 	  
 #endif
     //仅保留重要数据位其他位数据，其他位为零
-		if(rx_buffer_used[0] == 4 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)   //夹爪为前，直行
+		if(rx_buffer_used[0] == 4 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)   //后退
 		{
 			tar_speed_L = -(MOTOR_SPEED_MID + MOTOR_SPEED_DEV);
 			tar_speed_R = -MOTOR_SPEED_MID;
-		}else if(rx_buffer_used[0] == 2 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)  //夹爪为前，左转
+		}else if(rx_buffer_used[0] == 2 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)  //左转
 		{
 			tar_speed_L = -MOTOR_TURN_SPEED;
 			tar_speed_R = MOTOR_TURN_SPEED;
 		}
-		else if(rx_buffer_used[0] == 3 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)   //夹爪为前，右转
+		else if(rx_buffer_used[0] == 3 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)   //右转
 		{
       //
 			tar_speed_L = MOTOR_TURN_SPEED;
 			tar_speed_R = -MOTOR_TURN_SPEED;
 		}
-		else if(rx_buffer_used[0] == 1 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)    //夹爪为前，后退
+		else if(rx_buffer_used[0] == 1 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)    //直行
 		{
 			tar_speed_L = (MOTOR_SPEED_MID + MOTOR_SPEED_DEV);
 			tar_speed_R = MOTOR_SPEED_MID;
@@ -166,6 +171,31 @@ int main(void)
 			tar_speed_L = MOTOR_SPEED_STOP; //停止
 			tar_speed_R = MOTOR_SPEED_STOP;
 		}
+#if 1
+    //向前左偏
+    else if(rx_buffer_used[0] == 5 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)
+    {
+      tar_speed_L = MOTOR_SPEED_MID / 2;
+      tar_speed_R = MOTOR_SPEED_MID;
+    }
+    //向前右偏
+    else if (rx_buffer_used[0] == 6 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)
+    {
+      tar_speed_L = MOTOR_SPEED_MID;
+      tar_speed_R = MOTOR_SPEED_MID / 2;
+    }
+    //向后左偏
+    else if (rx_buffer_used[0] == 7 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)
+    {
+      tar_speed_L = -(MOTOR_SPEED_MID / 2); 
+      tar_speed_R = -MOTOR_SPEED_MID; 
+    }
+    else if (rx_buffer_used[0] == 8 && rx_buffer_used[1] == 0 && rx_buffer_used[2] == 0)
+    {
+      tar_speed_L = -MOTOR_SPEED_MID;
+      tar_speed_R = -(MOTOR_SPEED_MID / 2); 
+    }
+#endif //
 	//左侧夹爪
 	 if(rx_buffer_used[0] == 0 && rx_buffer_used[1] == 10 && rx_buffer_used[2] == 0) //down
     {

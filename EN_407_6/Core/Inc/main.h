@@ -88,14 +88,14 @@ void Error_Handler(void);
 //后侧电机左侧夹爪电机定时器通道 -- 通道1
 #define SERVO_BACK_GRAP_L_CHANNEL TIM_CHANNEL_1
 //左侧电即关闭角度
-#define SERVO_BACK_GRAP_L_CLOSE_ANGLE 180
+#define SERVO_BACK_GRAP_L_CLOSE_ANGLE 180 - 2
 //左侧电机张开角度
 #define SERVO_BACK_GRAP_L_OPEN_ANGLE (SERVO_BACK_GRAP_L_CLOSE_ANGLE - SERVO_BACK_GRAP_OPEN_ANGLE)
 
 //后侧电机右侧夹爪电机定时器通道 -- 通道2
 #define SERVO_BACK_GRAP_R_CHANNEL TIM_CHANNEL_2
 //右侧电机关闭角度
-#define SERVO_BACK_GRAP_R_CLOSE_ANGLE 0
+#define SERVO_BACK_GRAP_R_CLOSE_ANGLE 0 + 2
 //左侧电机张开角度
 #define SERVO_BACK_GRAP_R_OPEN_ANGLE (SERVO_BACK_GRAP_R_CLOSE_ANGLE + SERVO_BACK_GRAP_OPEN_ANGLE)
 
@@ -118,22 +118,21 @@ void Error_Handler(void);
 //电机运动
 #define RUN 0
 //电机正常直行运动速度
-#define MOTOR_SPEED_MID 4
+#define MOTOR_SPEED_MID 3
 //电机转动时电机速度
 #define MOTOR_TURN_SPEED 3
 //电机静止
 #define MOTOR_SPEED_STOP 0
 //电机速度偏差值
-#define MOTOR_SPEED_DEV 0.5f
+#define MOTOR_SPEED_DEV 0.1
 
-#define MOTOR_CCR_MAX `50.0f
+#define MOTOR_CCR_MAX `40.0f
 
 
 //PID系数
-#define KP 18
-#define KI 0.1
-#define KD 0.1
-#define PID_OUTMAX 5000.0f
+#define KP 15.5
+#define KI 1.2
+#define KD 1.2
 
 
 /* USER CODE BEGIN Private defines */
